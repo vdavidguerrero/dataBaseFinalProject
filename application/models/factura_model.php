@@ -12,13 +12,127 @@ class factura_model extends CI_Model{
     }
     
     
-    public function getCxP(){
+    
+    public function abonarCxC($idCxC, $monto){
+        
+     $sendingQuery = "  INSERT INTO [dbo].[Recibos]
+           ([Monto]
+           ,[Fecha])
+     VALUES
+           ('$monto',
+            GETDATE())";
+     
+     $this->db->query($sendingQuery);
+     
+      $sendingQuery2 = "
+        
+           SELECT top 1 ID from Recibos order by ID desc ";
+      
+      $item = $this->db->query($sendingQuery2)->row();
+                
+        $sendingQuery3 =     "   INSERT INTO [dbo].[Recibos_Cobros]
+           ([Recibos_Genericos_ID]
+           ,[Cuentas_Por_Cobrar])
+             VALUES
+           ($item->ID
+           ,$idCxC)";
+      
+     
+        $this->db->query($sendingQuery3);
+    
+        $sendingQuery10 = "
+        SELECT
+        [Monto_Pendiente]
+        FROM [aguacastalia].[dbo].[Cuentas_Por_Cobrar]
+         where ID = $idCxC";
+
+
+        $cxcCol = $this->db->query($sendingQuery10)->row();
+
+        $newVal = $cxcCol->Monto_Pendiente - $monto;
+       
+        
+        $sendingQuery11 = "
+         UPDATE [dbo].[Cuentas_Por_Cobrar]
+            
+            SET [Monto_Pendiente] = $newVal
+            WHERE ID = $idCxC";
+        $this->db->query($sendingQuery11);
+        
+    }
+    
+    
+    public function abonarCxP($idCxC, $monto){
+        
+     $sendingQuery = "  INSERT INTO [dbo].[Recibos]
+           ([Monto]
+           ,[Fecha])
+     VALUES
+           ('$monto',
+            GETDATE())";
+     
+     $this->db->query($sendingQuery);
+     
+      $sendingQuery2 = "
+        
+           SELECT top 1 ID from Recibos order by ID desc ";
+      
+      $item = $this->db->query($sendingQuery2)->row();
+                
+        $sendingQuery3 =     "   INSERT INTO [dbo].[Recibos_Pagos]
+           ([Recibos_Genericos_ID]
+           ,[Cuentas_Por_Pagar])
+             VALUES
+           ($item->ID
+           ,$idCxC)";
+      
+     
+        $this->db->query($sendingQuery3);
+    
+        $sendingQuery10 = "
+        SELECT
+        [Monto_Pendiente]
+        FROM [aguacastalia].[dbo].[Cuentas_Por_Pagar]
+         where ID = $idCxC";
+
+
+        $cxcCol = $this->db->query($sendingQuery10)->row();
+
+        $newVal = $cxcCol->Monto_Pendiente - $monto;
+       
+        
+        $sendingQuery11 = "
+         UPDATE [dbo].[Cuentas_Por_Pagar]
+            
+            SET [Monto_Pendiente] = $newVal
+            WHERE ID = $idCxC";
+        $this->db->query($sendingQuery11);
+        
+    }
+    
+ 
+    
+    public function getCxC(){
           $sendingQuery = "
-        select * from Cuentas_Por_Pagar
+         select *, Cuentas_Por_Cobrar.ID as facID from Cuentas_Por_Cobrar
+         join Facturas_Distribuidores on Facturas_Distribuidores.Facturas_ID = Facturas_Distribuidores
+         join Facturas on Facturas_Distribuidores.Facturas_ID = Facturas.ID
+         join Distribuidores on Distribuidores.Personas_ID = Facturas_Distribuidores.Distribuidores_ID 
+         join Personas on Distribuidores.Personas_ID = Personas.ID
              ";
               return $query = $this->db->query($sendingQuery)->result();
     }
     
+    
+     public function getCxP(){
+          $sendingQuery = "
+         select *, Cuentas_Por_Pagar.ID as facID from Cuentas_Por_Pagar
+         join Facturas_Suplidores on Facturas_Suplidores.Facturas_ID = Facturas_Suplidores
+         join Facturas on Facturas_Suplidores.Facturas_ID = Facturas.ID
+         join Suplidores on Suplidores.ID = Facturas_Suplidores.Suplidores_ID 
+             ";
+              return $query = $this->db->query($sendingQuery)->result();
+    }
     
     public function insertCxC($facturaID, $monto){
         
@@ -92,14 +206,40 @@ class factura_model extends CI_Model{
         return $id;
     }
     
-    
-    
+
     public function getFactura($facturaID)
     {
         $sendingQuery = "
         SELECT *
         FROM Facturas
         where ID = $facturaID
+        ";
+        $query = $this->db->query($sendingQuery);
+        $object = $query->result();
+        return $object; 
+    }
+    
+   
+            
+    
+    
+     public function getFacturas()
+    {
+        $sendingQuery = "
+        SELECT *
+        FROM Facturas
+        join Personas on  Personas.ID = Facturas.Empleados_ID";
+        $query = $this->db->query($sendingQuery);
+        $object = $query->result();
+        return $object; 
+    }
+    public function getFacturas2()
+    {
+        $sendingQuery = "
+        SELECT *
+        FROM Facturas
+        join Facturas_Suplidores on Facturas_Suplidores.Facturas_ID = Facturas.ID
+        join Personas on  Personas.ID = Facturas.Empleados_ID
         ";
         $query = $this->db->query($sendingQuery);
         $object = $query->result();

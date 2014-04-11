@@ -21,7 +21,37 @@ class venta extends CI_Controller {
     }
 
 
+   public function CxC(){
+      $this->dataPass["employees"] = $this->factura_model->getCxC();
+      $this->load->view("template/header",$this->dataPass);
+      $this->load->view("views/venta/CxC");
+      $this->load->view("template/footer");
+   }
    
+    public function CxP(){
+      $this->dataPass["employees"] = $this->factura_model->getCxP();
+      $this->load->view("template/header",$this->dataPass);
+      $this->load->view("views/venta/CxP");
+      $this->load->view("template/footer");
+   }
+   
+   public function cobrar(){
+         foreach ($this->input->post() as $k => $eso){           
+             if($eso != null)
+             $this->factura_model->abonarCxC($k,$eso);  
+         }
+         $this->CxC();
+   }
+   
+   public function pagar(){
+         foreach ($this->input->post() as $k => $eso){           
+             if($eso != null)
+             $this->factura_model->abonarCxP($k,$eso);  
+         }
+         $this->CxP();
+   }
+    
+    
    
    public function ventaMostrador() {
       

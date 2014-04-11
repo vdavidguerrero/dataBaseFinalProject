@@ -91,9 +91,7 @@
                         </button>
                         <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
                            
-                            <li role="presentation">
-                                <a  tabindex="-1" href="#">Cotizacion a distribuidores</a>
-                            </li>
+                           
                             <li role="presentation">
                                 <a  tabindex="-1" href="#">Cotizacion con suplidores</a>
                             </li>
@@ -114,28 +112,16 @@
                  
                     
                     <div class="dropdown form-group">
-                        <button class="btn dropdown-toggle "id="dropdownMenu1" data-toggle="dropdown">
-                            Cuentas Por Pagar
+                        <button class="btn ">
+                          <a  tabindex="-1" href="/index.php/venta/CxC"> Cuentas Por Cobrar</a>
                         </button>
-                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                            <li role="presentation">
-                                <a  tabindex="-1" href="#">Realizar Pago</a>
-                            </li>
-                            <li role="presentation">
-                                <a  tabindex="-1" href="#">Ver Cuentas por pagar</a>
-                            </li>
+                 
                     </div>
                     <div class="dropdown form-group">
-                        <button class="btn dropdown-toggle "id="dropdownMenu1" data-toggle="dropdown">
-                            Cuentas Por Cobrar
+                        <button class="btn ">
+                          <a  tabindex="-1" href="/index.php/venta/CxP"> Cuentas Por Pagar</a>
                         </button>
-                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                            <li role="presentation">
-                                <a  tabindex="-1" href="#">Realizar Cobro</a>
-                            </li>
-                            <li role="presentation">
-                                <a  tabindex="-1" href="#">Ver Cuentas por Cobrar</a>
-                            </li>
+                 
                     </div>
                     <div class="dropdown form-group">
                         <button class="btn dropdown-toggle "id="dropdownMenu1" data-toggle="dropdown">
@@ -143,27 +129,20 @@
                         </button>
                         <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
                             <li role="presentation">
-                                <a  tabindex="-1" href="#">Ventas</a>
+                                <a  tabindex="-1" href="/index.php/reports/ventas">Ventas</a>
                             </li>
                             <li role="presentation">
-                                <a  tabindex="-1" href="#">Gastos</a>
+                                <a  tabindex="-1" href="/index.php/reports/CxC">Cuentas Por Cobrar</a>
                             </li>
                             <li role="presentation">
-                                <a  tabindex="-1" href="#">Inventario</a>
+                                <a  tabindex="-1" href="/index.php/reports/CxP">Cunetas Por Pagar</a>
                             </li>
-                            <li role="presentation">
-                                <a  tabindex="-1" href="#">Devoluciones</a>
-                            </li>
-                            <li role="presentation">
-                                <a  tabindex="-1" href="#">Ganancias</a>
-                            </li>
+                           
                              <li role="presentation">
-                                <a  tabindex="-1" href="#">Logs</a>
+                                <a  tabindex="-1" href="/index.php/reports/logs">Logs</a>
                             </li>
                         </ul>
                     </div>
-                    
-                    
                 </div>
             </div>
         </div>

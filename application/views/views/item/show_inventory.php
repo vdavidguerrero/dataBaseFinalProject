@@ -8,7 +8,7 @@
                                     <th>Costo</th>
                                     <th>Precio</th>
                                     <th>Cantidad</th>
-                                    <th>Agregar</th>    
+                                   
                                     
                                     <th>Borrar</th> 
                                 </tr>
@@ -23,7 +23,7 @@
                                                 <td> ".$item->Costo." </td>
                                                 <td> ".$item->Precio."</td>
                                                 <td> ".$item->Cantidad."</td>
-                                                <td> <div class='col-md-8'><input type='text' class='form-control ' name='".$item->ID."'> </div> </td> 
+                                                
                                                 <td><a href=/index.php/item/deleteItem/".$item->ID."> Borrar </td>    
                                             </tr>
                                      "; 
