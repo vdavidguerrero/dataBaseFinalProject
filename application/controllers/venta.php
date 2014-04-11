@@ -103,6 +103,47 @@ class venta extends CI_Controller {
        
    }
    
+   public function cotizar(){
+       
+       if($this->input->post()){
+         $ventaObject = new stdClass();
+         $arr = $this->input->post();
+       
+         $ventaObject->Descuento = $arr["Descuento"]."%";
+         $ventaObject->ITBIS = $arr["ITBIS"]."%";
+         $ventaObject->Total = $arr["Total"];
+         $ventaObject->Tipo = "Contado";
+         $ventaObject->Empleados_ID = $arr["employee"];
+         $ventaObject->enteID = $arr["enteID"];
+         unset($arr["Descuento"]);
+         unset($arr["ITBIS"]);
+         unset($arr["Total"]);
+         unset($arr["employee"]);
+          unset($arr["enteID"]);
+         $this->factura_model->cotizar($ventaObject);
+      
+            $this->dataPass['alert'] = 'Cotiszacion realizada';
+            $this->dataPass["employees1"] = $this->suplidores_model->getSuplidores();
+             
+            $this->dataPass["employees"] = $this->employees_model->getEmployees();
+            $this->dataPass["items"] = $this->item_model->getInvenroty();
+            $this->load->view("template/header",$this->dataPass);
+            $this->load->view("views/venta/cotizar");
+            $this->load->view("template/footer");
+         
+       }
+       else{
+           
+            $this->dataPass["employees1"] = $this->suplidores_model->getSuplidores();
+            $this->dataPass["employees"] = $this->employees_model->getEmployees();
+            $this->dataPass["items"] = $this->item_model->getInvenroty();
+            $this->load->view("template/header",$this->dataPass);
+            $this->load->view("views/venta/cotizar");
+            $this->load->view("template/footer");
+       }
+       
+   }
+   
     public function compraSuplidor() {
       
        if($this->input->post()){

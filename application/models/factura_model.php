@@ -219,10 +219,7 @@ class factura_model extends CI_Model{
         return $object; 
     }
     
-   
-            
-    
-    
+
      public function getFacturas()
     {
         $sendingQuery = "
@@ -375,6 +372,57 @@ class factura_model extends CI_Model{
            return false;
         }
        
+    }
+    
+    
+    
+    
+    public function cotizar($factura,$flag =0){
+
+        $sendingQuery = "
+        
+           INSERT INTO [dbo].[Cotizaciones]
+           ([Total]
+           ,[Fecha]
+           ,[ITBIS]
+           ,[Decuento]
+           ,[Tipo])
+            VALUES
+                    (
+                    $factura->Total,
+                    GETDATE(),
+                    '$factura->ITBIS',
+                    '$factura->Descuento',
+                    '$factura->Tipo'    
+                    )";
+        
+        $this->db->query($sendingQuery);
+        $sendingQuery2 = "SELECT top 1 ID from Cotizaciones order by ID desc ";
+        $facturaObject = $this->db->query($sendingQuery2)->row();
+        
+        if($flag == 1){
+            $this->insertFacturaDistrubuidor($facturaObject->ID,$factura->enteID);
+        }
+        else if($flag == 0){
+            $this->cotizar2($facturaObject->ID,$factura->enteID);
+        
+        }
+        return $facturaObject->ID;
+    }
+ 
+    
+    public function cotizar2($idFactura, $idDistribuidor){
+        $sendingQuery = "
+                INSERT INTO [dbo].[Cotizaciones_Suplidores]
+                  ([Cotizaciones_ID]
+                  ,[Suplidores_ID])
+                 VALUES
+                        (
+                        $idFactura,
+                        $idDistribuidor
+                        )";
+        
+        $this->db->query($sendingQuery);
     }
     
 }

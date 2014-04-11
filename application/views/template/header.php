@@ -93,8 +93,9 @@
                            
                            
                             <li role="presentation">
-                                <a  tabindex="-1" href="#">Cotizacion con suplidores</a>
+                                <a  tabindex="-1" href="/index.php/venta/Cotizar">Cotizacion con suplidores</a>
                             </li>
+                            
                             
                             <li role="presentation">
                                 <a  tabindex="-1" href="/index.php/venta/compraSuplidor">Compra a suplidores</a>
@@ -137,10 +138,7 @@
                             <li role="presentation">
                                 <a  tabindex="-1" href="/index.php/reports/CxP">Cunetas Por Pagar</a>
                             </li>
-                           
-                             <li role="presentation">
-                                <a  tabindex="-1" href="/index.php/reports/logs">Logs</a>
-                            </li>
+                          
                         </ul>
                     </div>
                 </div>
