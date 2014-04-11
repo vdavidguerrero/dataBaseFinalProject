@@ -40,8 +40,12 @@
 * @property CI_Zip $zip
 *
 * @property employees_model $employees_model
-* @property ad_model   $ad_model
-* @property user_model $user_model
+ * @property item_model $item_model
+ *  @property suplidores_model $suplidores_model
+ * 
+ *  @property production_model $production_model
+ * @property factura_model $factura_model
+
 * 
 
 */

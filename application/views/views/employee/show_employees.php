@@ -10,8 +10,8 @@
                             <th>Celular</th>
                             <th>Sueldo</th>
                             <th>Fecha  Ingreso</th>
-                            <th>Edit</th>
-                            
+                            <th>Editar</th>
+                            <th>Borrar</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -26,7 +26,9 @@
                                         <td> ".$employee->Celular."</td>
                                         <td> ".$employee->Sueldo." </td>
                                         <td> ".$employee->Fecha_Ingreso." </td>
-                                        <td><a href=index.php/employees/addEmployee/".$employee->ID."> Edit </td>    
+                                        <td><a href=/index.php/employees/editEmployee/".$employee->ID."> Edit </td> 
+                                        <td><a href=/index.php/employees/deleteEmployee/".$employee->ID."> Delete </td>
+                                                
                                     </tr>
                              "; 
                             } 
